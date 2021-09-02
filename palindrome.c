@@ -21,8 +21,6 @@ int isPalindromeWhile(char character[]) {
   return 1;
 }
 
-
-
 void main() {
   printf(isPalindromeWhile("Was it a car or a cat I saw") ? "True" : "False");
 }
