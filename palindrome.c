@@ -1,18 +1,29 @@
 #include<stdio.h> // header file
 #include<string.h>
+#include<ctype.h>
 
-void isPalindrome(char character[]) {
-  int length = strlen(character);
-  for (int i = 0; i < length; i++) {
-    if (character[i] != character[length-1-i]) {
-      printf("False");
-      return;
-    } 
+int isPalindromeWhile(char character[]) {
+  int i = 0;
+  int j = strlen(character)-1;
+  while (i < j) {
+    if (character[i] == ' ') {
+      i++;
+    }
+    if (character[j] == ' ') {
+      j--;
+    }
+    if (tolower(character[i]) != tolower(character[j])) {
+      return 0;
+    }
+    i++;
+    j--;
   }
-  printf("True");
+  return 1;
 }
 
+
+
 void main() {
-  isPalindrome("abab");
+  printf(isPalindromeWhile("Was it a car or a cat I saw") ? "True" : "False");
 }
 
