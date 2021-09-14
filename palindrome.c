@@ -2,17 +2,17 @@
 #include<string.h>
 #include<ctype.h>
 
-int isPalindromeWhile(char character[]) {
+int isPalindromeWhile(char c[]) {
   int i = 0;
-  int j = strlen(character)-1;
+  int j = strlen(c)-1;
   while (i < j) {
-    if (character[i] == ' ') {
+    if (c[i] == ' ') {
       i++;
     }
-    if (character[j] == ' ') {
+    if (c[j] == ' ') {
       j--;
     }
-    if (tolower(character[i]) != tolower(character[j])) {
+    if (tolower(c[i]) != tolower(c[j])) {
       return 0;
     }
     i++;

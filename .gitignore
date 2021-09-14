@@ -1,12 +1,15 @@
-# Ignore all
+# ----------------------------------
+## To ignore all linux binaries we need to to these three steps 
+# 1. Ignore all
 *
 
-# Unignore all with extensions
+# 2. Unignore all with extensions
 !*.*
 
-# Unignore all dirs
+# 3.  Unignore all dirs
 !*/
 
-#ignore windows executable files.
 
+# -------------------------------
+## ignore windows executable files.
 *.exe
