@@ -6,7 +6,6 @@ _start:
 	mov r0, #0 					// r0 = i = 0
 	ldr r1, =input				// input words
 	mov r2, #0					// r2 = j = 0, but we need it to be length of word - 1 				
-	mov r5, #1					// isPalindrome = 1 (True)
 	
 	ldrb r3, [r1, r2] 			// first char 
 	
@@ -15,12 +14,7 @@ _start:
 	
 	ldrb
 	b check_palindrome
-	cmp r5, #1					// if r5 == 1 (True) => isPalindrome
-	beq palindrome_found
-	b palindrome_not_found
-	
-
-	b exit 
+	b palindrome_found	
 	
 	
 find_length: 					// find and set length of input string 
@@ -39,8 +33,6 @@ check_palindrome: 				// Check if input is a palindrome
 	blt while_palindrome
 	mov pc, lr
 	while_palindrome:			// while r0 < r2  
-		ldrb r3, [r1, r0]		// r3 = string[i]
-		ldrb r4, [r1, r2]		// r4 = string[j]
 	
 		cmp r3, #0x20				// if string[i] == ' ' => i++
 		beq increment_i		
@@ -66,11 +58,12 @@ compare_chars:
 	cmp r4, #0x41
 	bgt is_capital_j
 
+	ldrb r3, [r1, r0]		// r3 = string[i]
+	ldrb r4, [r1, r2]		// r4 = string[j]
+
 	cmp r3, r4					//if string[i] != string[j] => palindrome not found
-	bne not_equal
-	not_equal:
-	mov r5, #0
-	
+	bne palindrom_not_found 
+		
 
 	
 is_capital_i:					// if current char is capital |  0x41 < string[i] < 0x5A
@@ -94,11 +87,12 @@ palindrome_found:
 	// Switch on only the 5 rightmost LEDs
 	// Write 'Palindrome detected' to UART
 	
+	b exit
 	
 palindrom_not_found:
 	// Switch on only the 5 leftmost LEDs
 	// Write 'Not a palindrome' to UART
-	
+	b exit
 	
 exit:
 	// Branch here for exit
