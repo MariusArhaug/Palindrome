@@ -3,38 +3,38 @@
 .section .text
 
 _start:
-	mov r0, #0 					// r0 = i = 0
-	ldr r1, =input				// input words
-	mov r2, #0					// r2 = j = 0, but we need it to be length of word - 1 				
+	mov r0, #0 							// r0 = i = 0
+	ldr r1, =input					// input words
+	mov r2, #0							// r2 = j = 0, but we need it to be length of word - 1 				
 	
 	ldrb r3, [r1, r2] 			// first char 
 	
 	b find_length
-	sub r2, r2, #-1 			// j = len(string) - 1
+	sub r2, r2, #-1 				// j = len(string) - 1
 	
-	ldrb
 	b check_palindrome
 	b palindrome_found	
 	
 	
-find_length: 					// find and set length of input string 
-	cmp r3, #0
-	bne check_input_main
-	mov pc, lr					// Move pc back to start function call 	
+find_length: 							// find and set length of input string 
+	cmp r3, #0							// copare current char with end of string
+	bne check_input_main		// if not end of string iterate 
+
+	mov pc, lr							// After loop move pc back to start function call 	
 	
 	find_length_main:
-	add r2, r2, #1 				// Increment r2 (j++)
-	ldrb r3 [r1, r2]			// update r3 to be next char, string[j]
-	b find_length 				// branch to loop
+	add r2, r2, #1 					// Increment r2 (j++)
+	ldrb r3 [r1, r2]				// update r3 to be next char, string[j]
+	b find_length 					// branch to loop
 	
 	
-check_palindrome: 				// Check if input is a palindrome
-	cmp r0, r2					// check for r0 < r2 
+check_palindrome: 				// Main function in program
+	cmp r0, r2							// while r0 < r2 do while_palindrome
 	blt while_palindrome
-	mov pc, lr
-	while_palindrome:			// while r0 < r2  
-	
-		cmp r3, #0x20				// if string[i] == ' ' => i++
+	mov pc, lr							// Move pc back to _start and branch for palindrome found since it did not break out
+	while_palindrome:				// while r0 < r2  
+
+		cmp r3, #0x20					// if string[i] == ' ' => i++
 		beq increment_i		
 		increment_i:
 			add r0, r0, #1
@@ -52,7 +52,7 @@ check_palindrome: 				// Check if input is a palindrome
 
 
 compare_chars:
-	cmp r3, #0x41
+	cmp r3, #0x41				// if hex value of string[i] is greater than 41 branch to capital checker 
 	bgt is_capital_i
 	
 	cmp r4, #0x41
