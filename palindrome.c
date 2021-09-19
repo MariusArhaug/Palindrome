@@ -2,7 +2,7 @@
 #include<string.h>
 #include<ctype.h>
 
-int isPalindromeWhile(char c[]) {
+int checkPalindrome(char c[]) {
   int i = 0;
   int j = strlen(c)-1;
   while (i < j) {
@@ -22,6 +22,6 @@ int isPalindromeWhile(char c[]) {
 }
 
 void main() {
-  printf(isPalindromeWhile("Was it a car or a cat I saw") ? "True" : "False");
+  printf(checkPalindrome("Was it a car or a cat I saw") ? "True" : "False");
 }
 
